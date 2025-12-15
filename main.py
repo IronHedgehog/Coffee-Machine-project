@@ -32,16 +32,33 @@ resources = {
 
 
 def check_resources(user_input, resources_in_machine):
-    if MENU[user_input]["ingredients"]["water"] < resources_in_machine["water"]:
-        if MENU[user_input]["ingredients"]["coffee"] < resources_in_machine["coffee"]:
-            if MENU[user_input]["ingredients"]["milk"] < resources_in_machine["milk"]:
-                return "we can do this"
-            else:
-                return "no enough milk in machine"
-        else:
-            return  "no enough coffee in machine"
-    else:
-        return "no enough water in machine"
+    #1
+    # result = False
+    # for resource in resources_in_machine:
+    #     if resource not in MENU[user_input]["ingredients"]: continue
+    #     if MENU[user_input]["ingredients"][resource] > resources_in_machine[resource]:
+    #         result =  f"no enough {resource} in machine"
+    #     else:
+    #         result =  True
+    # return result
+
+    # #2
+    # ingredients = MENU[user_input]["ingredients"]
+    #
+    # for resource in ingredients:
+    #     needed = ingredients[resource]
+    #
+    #     if resources_in_machine[resource] < needed:
+    #         return f"no enough {resource} in machine"
+    #
+    # return True
+
+    # #3
+        for ingredient, amount in MENU[user_input]["ingredients"].items():
+            if resources_in_machine[ingredient] < amount:
+                print(f"no enough {ingredient} in machine")
+                return False
+        return True
 
 def off_process():
     return False
@@ -62,7 +79,7 @@ while process:
         print(f"money ${money}")
 
     if answer == "espresso":
-        check_resources(answer, resources)
+       print(check_resources(answer, resources))
 
 
 
