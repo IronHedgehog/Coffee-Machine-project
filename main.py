@@ -43,22 +43,23 @@ def check_resources(user_input, resources_in_machine):
     # return result
 
     # #2
-    # ingredients = MENU[user_input]["ingredients"]
-    #
-    # for resource in ingredients:
-    #     needed = ingredients[resource]
-    #
-    #     if resources_in_machine[resource] < needed:
-    #         return f"no enough {resource} in machine"
-    #
-    # return True
+    ingredients = MENU[user_input]["ingredients"]
+
+    for resource in ingredients:
+        needed = ingredients[resource]
+
+        if resources_in_machine[resource] < needed:
+             print(f"no enough {resource} in machine")
+             return False
+
+    return True
 
     # #3
-        for ingredient, amount in MENU[user_input]["ingredients"].items():
-            if resources_in_machine[ingredient] < amount:
-                print(f"no enough {ingredient} in machine")
-                return False
-        return True
+    #     for ingredient, amount in MENU[user_input]["ingredients"].items():
+    #         if resources_in_machine[ingredient] < amount:
+    #             print(f"no enough {ingredient} in machine")
+    #             return False
+    #     return True
 
 def off_process():
     return False
