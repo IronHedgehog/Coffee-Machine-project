@@ -24,6 +24,13 @@ MENU = {
     }
 }
 
+COINS = {
+    "quarters": 0.25,
+    "dimes": 0.10,
+    "nickles": 0.05,
+    "pennies": 0.01,
+}
+
 resources = {
     "water": 300,
     "milk": 200,
@@ -61,6 +68,26 @@ def check_resources(user_input, resources_in_machine):
     #             return False
     #     return True
 
+
+
+def collect_coins():
+    print("Please insert coins.")
+    coins = {}
+
+    for coin in COINS:
+        coins[coin] = int(input(f"How many {coin}?: "))
+
+    return coins
+
+def check_money(drink,coins):
+        total = 0
+
+        for coin, count in coins.items():
+            total += count * COINS[coin]
+
+        return total >= MENU[drink]["cost"]
+
+
 def off_process():
     return False
 
@@ -80,7 +107,14 @@ while process:
         print(f"money ${money}")
 
     if answer == "espresso":
-       print(check_resources(answer, resources))
+       if check_resources(answer, resources):
+            coins = collect_coins()
+            if check_money(answer, coins):
+
+
+
+
+
 
 
 
