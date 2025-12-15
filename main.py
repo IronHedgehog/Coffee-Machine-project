@@ -38,7 +38,7 @@ resources = {
 }
 
 
-def check_resources(user_input, resources_in_machine):
+def check_resources(drink, resources_in_machine):
     #1
     # result = False
     # for resource in resources_in_machine:
@@ -50,7 +50,7 @@ def check_resources(user_input, resources_in_machine):
     # return result
 
     # #2
-    ingredients = MENU[user_input]["ingredients"]
+    ingredients = MENU[drink]["ingredients"]
 
     for resource in ingredients:
         needed = ingredients[resource]
@@ -85,7 +85,21 @@ def check_money(drink,coins):
         for coin, count in coins.items():
             total += count * COINS[coin]
 
-        return total >= MENU[drink]["cost"]
+        if total < MENU[drink]["cost"]:
+            print("Sorry that's not enough money. Money refunded.")
+            return False
+
+        return True
+
+def minus_resources(drink,resources_in_machine):
+    ingredients = MENU[drink]["ingredients"]
+
+    for resource in ingredients:
+        needed = ingredients[resource]
+
+        resources_in_machine[resource] -= needed
+
+
 
 
 def off_process():
@@ -106,10 +120,12 @@ while process:
         print(f"coffee {resources["coffee"]}g")
         print(f"money ${money}")
 
-    if answer == "espresso":
+    if answer in MENU:
        if check_resources(answer, resources):
             coins = collect_coins()
             if check_money(answer, coins):
+                minus_resources(answer,resources)
+                print(f"Here is your {answer} ☕ Enjoy!")
 
 
 
