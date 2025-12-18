@@ -31,6 +31,8 @@ COINS = {
     "pennies": 0.01,
 }
 
+money = 0
+
 resources = {
     "water": 300,
     "milk": 200,
@@ -89,6 +91,11 @@ def check_money(drink,coins):
             print("Sorry that's not enough money. Money refunded.")
             return False
 
+        if total > MENU[drink]["cost"]:
+            change = total - MENU[drink]["cost"]
+            upgrade_change = round(change,2)
+            print(f"here is your ${upgrade_change} change")
+
         return True
 
 def minus_resources(drink,resources_in_machine):
@@ -109,7 +116,7 @@ process = True
 
 while process:
     answer = input("What would you like?(espresso, latte, cappuccino): ")
-    money = 0
+
 
     if answer == "off":
        process = off_process()
